@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-brand;
+  }
+}
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 md:px-8;
+  }
+  .section {
+    @apply py-14 md:py-20;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-paper shadow-[0_1px_0_rgba(0,0,0,.02)];
+  }
+  .eyebrow {
+    @apply mb-2 text-[11px] font-bold uppercase tracking-[.18em] text-brand;
+  }
+  .h2 {
+    @apply font-serif text-3xl font-bold leading-tight md:text-5xl;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_20px_-8px_rgba(214,40,40,.7)] transition hover:bg-brandDark active:scale-[.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-line bg-paper px-6 py-3.5 text-sm font-bold text-ink transition hover:border-brand hover:text-brand;
+  }
+  .label {
+    @apply mb-1.5 block text-[11px] font-bold uppercase tracking-wider text-ink/70;
+  }
+  .field {
+    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-sm placeholder:text-ink/35 focus:border-brand focus:outline-none;
+  }
+}
+.defer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroImageZoom {
+  from {
+    transform: scale(1.06);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes heroFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.hero-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.hero-delay-3 {
+  animation-delay: 0.25s;
+}
+
+.hero-delay-4 {
+  animation-delay: 0.35s;
+}
+
+.hero-delay-5 {
+  animation-delay: 0.45s;
+}
+
+.hero-image-motion {
+  animation: heroImageZoom 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-float {
+  animation: heroFloat 4.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal,
+  .hero-image-motion,
+  .hero-float {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
