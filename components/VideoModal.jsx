@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Icon from "./ui/Icon";
 
-// Video only: no title, no category, no details. <video> exists only while open.
-export default function VideoModal({ src, title, onClose }) {
+export default function VideoModal({ src, title, cover, onClose }) {
   const closeRef = useRef(null);
+  const [status, setStatus] = useState("loading"); // loading | ready | error
 
   useEffect(() => {
     const prev = document.activeElement;
@@ -27,8 +27,36 @@ export default function VideoModal({ src, title, onClose }) {
           className="absolute -top-11 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white hover:bg-brand">
           <Icon name="close" className="h-4 w-4" />
         </button>
-        <video src={src} controls autoPlay playsInline preload="metadata"
-          className="aspect-[9/16] max-h-[82vh] w-auto max-w-[92vw] rounded-2xl bg-black" />
+
+        {/* wrapper بحجم ثابت عشان المكان ما يتغيرش وقت التحميل */}
+        <div className="relative aspect-[9/16] h-[82vh] max-w-[92vw] overflow-hidden rounded-2xl bg-black">
+          <video
+            src={src}
+            poster={cover}
+            controls
+            autoPlay
+            playsInline
+            preload="auto"
+            onCanPlay={() => setStatus("ready")}
+            onError={() => setStatus("error")}
+            className={`h-full w-full object-contain transition-opacity duration-300 ${status === "ready" ? "opacity-100" : "opacity-0"}`}
+          />
+
+          {status === "loading" && (
+            <div role="status" aria-live="polite"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/60">
+              <span className="h-10 w-10 animate-spin rounded-full border-4 border-white/20 border-t-brand" />
+              <span className="text-xs font-bold text-white/80">Loading video…</span>
+            </div>
+          )}
+
+          {status === "error" && (
+            <div role="alert"
+              className="absolute inset-0 flex items-center justify-center p-6 text-center text-sm font-bold text-white/80">
+              Couldn't load the video. Please try again.
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -12,14 +12,11 @@ export const FILTERS = [
   { id: "lifestyle", label: "Lifestyle" },
 ];
 
-// Drop files in /public/videos and update `src`
-export const WORKS = [
-  { id: 1, tag: "Beauty Hook", result: "+130% Add-to-Cart", title: "Glow Serum '3-Second Pause' Hook", meta: "Meta Spark Ad • Beauty", cat: "beauty", src: "/videos/work-1.mp4", pos: "50% 18%" },
-  { id: 2, tag: "Styling UGC", result: "4.2x Direct ROAS", title: "Streetwear Sunglasses Lookbook", meta: "TikTok Organic & Paid • Fashion", cat: "fashion", src: "/videos/work-2.mp4", pos: "70% 30%" },
-  { id: 3, tag: "GRWM", result: "+88% Hook Rate", title: "Morning Routine Seamless Demo", meta: "Reels Ad • Lifestyle", cat: "lifestyle", src: "/videos/work-3.mp4", pos: "35% 45%" },
-  { id: 4, tag: "Unboxing", result: "2.9x ROAS", title: "Skincare Haul First Impressions", meta: "TikTok Spark Ad • Beauty", cat: "beauty", src: "/videos/work-4.mp4", pos: "60% 60%" },
-];
-
+  export const WORKS = Array.from({ length: 8 }, (_, i) => ({
+    id: i + 1,
+    src: `/videos/${i + 1}.mp4`,
+    cover: `/cover/${i + 1}.jpg`,
+  }));
 export const WHY = [
   { icon: "scissors", tone: "red", title: "Hook-First Editing", text: "First 3 seconds engineered with visual pattern interrupts, curiosity gaps, and sound triggers to halt endless scrolling." },
   { icon: "chat", tone: "amber", title: "Authentic Storytelling", text: "Speaking peer-to-peer, not like a polished corporate commercial. Builds rapid trust and organic social proof." },
